@@ -25,8 +25,8 @@ void setup(){
       float Gx = -m[i-1][j-1] + m[i-1][j+1] 
                 -m[i][j-1]*2 + m[i][j+1]*2 
                 -m[i+1][j-1] + m[i+1][j+1];
-      float Gy = m[i-1][j-1] + m[i-1][j]*2 + m[i-1][j+1]
-                -m[i+1][j-1] - m[i+1][j]*2 - m[i+1][j+1];
+      float Gy = m[i+1][j-1] + m[i+1][j]*2 + m[i+1][j+1]
+                -m[i-1][j-1] - m[i-1][j]*2 - m[i-1][j+1];
       float G = sqrt(Gx*Gx+Gy*Gy);
       sobelX.pixels[ii] = color(Gx);
       sobelY.pixels[ii] = color(Gy);
