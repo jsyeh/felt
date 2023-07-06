@@ -72,7 +72,7 @@ void keyReleased(){
 void draw(){
   background(0);
   stroke(255,128);
-  float s = 0.3;
+  float s = 0.1;
   for(int i=0; i<256; i+=1){
     for(int j=0; j<256; j+=1){
       int ii = i*256+j;
@@ -80,7 +80,7 @@ void draw(){
         //照著梯度的垂直方向，畫出來的線，剛好和線的方向有關
         line(j*4,i*4, j*4+Gy[ii]/20.0, i*4-Gx[ii]/20.0); //沒有亂數的原始梯度值轉成的edge方向
       }else{
-        stroke(img.pixels[ii]); //照原始照片，加上色彩
+        stroke(img.pixels[ii], 128); //照原始照片，加上色彩
         //畫越多層越慢，預設先畫 Undirected layers
         if(L3) line(j*4-LayerX[3][ii]/s, i*4-LayerY[3][ii]/s, j*4+LayerX[3][ii]/s, i*4+LayerY[3][ii]/s); //Undirected
         //下面是 Directed layers
