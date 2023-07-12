@@ -3,11 +3,13 @@ int[][] density = new int[20][20];
 void setup(){
   size(500,500,P3D);
   for(int k=0; k<1000; k++){
-    v[k] = new PVector( randomGaussian()*50, randomGaussian()*50);
+    float x = randomGaussian()*50, y = randomGaussian()*50;
+    v[k] = new PVector(x, y);
     //從第20行，推算 float x = i*10-100, y = j*10-100;
     // 移項變號，得到 i*10 = x + 100, i = (x+100)/10
-    int i = int(v[k].x+100)/10, j = int(v[k].y+100)/10;
-    if(i<0 || j<00 || i>=20 || j>=20) continue;
+    int i = int(x+100)/10, j = int(y+100)/10;
+    if(i<0 || j<0 || i>=20 || j>=20) continue;
+    
     density[i][j]++;
   }
 }
