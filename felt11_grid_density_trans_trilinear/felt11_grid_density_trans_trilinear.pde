@@ -50,7 +50,7 @@ void setup(){
   sobelY.updatePixels();
   sobel.updatePixels();
   for(int L = 0; L<12; L++){ //3層 directed, 9層 undirected
-    //LL[L] = true; //12層全秀，要16秒，且CPU 100%快當掉了
+    LL[L] = true; //12層全秀，要16秒，且CPU 100%快當掉了
     for(int ii=0; ii<256*256; ii++){
       boolean directed = true; //directed
       if(L>=3) directed = false; //undirected
@@ -94,7 +94,7 @@ void updateDensity(){//假設最簡單的，從正上方光線射入
   }
   updateTransmittance();
 }
-float f = 1, ds = 1;
+float f = 1, ds = 0.05;
 void updateTransmittance(){
   //根據 felt論文及 2005頭髮的論文 Tijk 的 ijk 不是 xyz。i方向是光的方向，也就是z的方向
   for(int ix=0; ix<NX; ix++){
@@ -186,7 +186,7 @@ void draw(){
   stroke(255,128);
   float len = 2.0;
   LL[3]=true;
-  for(int L=3; L>=0; L--){ //12層全秀，要16秒，且CPU 100%快當掉了
+  for(int L=12-1; L>=0; L--){ //12層全秀，要16秒，且CPU 100%快當掉了
     for(int i=0; i<256; i+=1){
       for(int j=0; j<256; j+=1){
         int ii = i*256+j;
@@ -200,9 +200,9 @@ void draw(){
             beginShape(LINES);
             float x = j*4, y = i*4;
             for(int s=0; s<segmentN; s++){
-              myStroke(img.pixels[ii], StrandTrans[L][ii][s]*10, 255*transparent);
+              myStroke(img.pixels[ii], StrandTrans[L][ii][s]*1, 255*transparent);
               vertex(x,y);
-              myStroke(img.pixels[ii], StrandTrans[L][ii][s+1]*10, 255*transparent);
+              myStroke(img.pixels[ii], StrandTrans[L][ii][s+1]*1, 255*transparent);
               vertex(x+LayerX[L][ii][s]*len, y+LayerY[L][ii][s]*len);
               //line(x, y, x+LayerX[L][ii][s]*len, y+LayerY[L][ii][s]*len); //Undirected
               x += LayerX[L][ii][s]*len;
